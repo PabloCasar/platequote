@@ -1222,7 +1222,7 @@ function dirStore(h){
   };
 }
 // 2) Google Drive (sirve en el móvil). Solo ve la carpeta que crea ella misma (permiso drive.file).
-const DRIVE_CLIENT_ID = "";   // lo rellena publicar.ps1 con movil/config.json
+const DRIVE_CLIENT_ID = "75475529400-shnc8k84vtfimnrjhf8d8i391d0aofjk.apps.googleusercontent.com";   // lo rellena publicar.ps1 con movil/config.json
 const DRIVE_FOLDER = "Tarifa3D - Presupuestos";
 const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.file";
 const driveClientId = () => (lsGet("tarifa3d.gclient") || DRIVE_CLIENT_ID || "").trim();
