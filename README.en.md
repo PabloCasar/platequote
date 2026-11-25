@@ -105,6 +105,10 @@ While you are not connected, whatever you do is saved on the device and uploaded
 
 The code is a single HTML file (dependency-free JavaScript) published with GitHub Pages. To store data in your own Drive you need to create a Google OAuth client ID (web application type) with the `drive.file` scope and add your GitHub Pages origin as an authorised origin; then paste it in Settings → "Where data is saved" or in the publishing configuration. No database or server is needed.
 
+## Support the project
+
+If it is useful to you and you would like to help with its upkeep, you can buy me a coffee at **https://paypal.me/pablocasar**. It is not required: the calculator is free and will stay free.
+
 ## License
 
 The software is released under the **MIT License** (see [LICENSE](LICENSE)): you may use, copy, modify and distribute it, including commercially, as long as you keep the copyright notice.

@@ -105,6 +105,10 @@ Mientras no estés conectado, lo que hagas se guarda en el dispositivo y se sube
 
 El código es un único archivo HTML (JavaScript sin dependencias), que se publica con GitHub Pages. Para guardar en tu propio Drive hace falta crear un ID de cliente de Google (OAuth, tipo aplicación web) con el permiso `drive.file` y poner tu origen de GitHub Pages como origen autorizado; después, pegarlo en Tarifas → «Dónde se guarda» o en la configuración de publicación. No se necesita ninguna base de datos ni servidor.
 
+## Apoyar el proyecto
+
+Si te resulta útil y quieres colaborar con el mantenimiento, puedes invitarme a un café en **https://paypal.me/pablocasar**. No es obligatorio: la calculadora es gratuita y seguirá siéndolo.
+
 ## Licencia
 
 El software se publica bajo la **licencia MIT** (consulta [LICENSE](LICENSE)): puedes usarlo, copiarlo, modificarlo y distribuirlo, también con fines comerciales, siempre que conserves el aviso de copyright.
