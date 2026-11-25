@@ -1,8 +1,8 @@
-# Tarifa 3D · Price calculator for 3D printing
+# PlateQuote · Price calculator for 3D printing
 
 **A price calculator, order tracker and invoicing tool for people who sell 3D-printed parts.** It runs in the browser, needs no server or paid account, and stores your data in your own Google Drive or in a folder on your computer. It can be installed on your phone as an app.
 
-> **Open the calculator:** https://pablocasar.github.io/tarifa3d/Presupuestos/
+> **Open the calculator:** https://pablocasar.github.io/platequote/Presupuestos/
 >
 > **Español:** [README.md](README.md)
 
@@ -73,7 +73,7 @@ Each part or product can store a **market price** (average, range and sources) s
 The calculator **has no server of its own**: your data never goes through me or any third party other than the place you choose.
 
 - **Folder on your computer** (desktop Chrome or Edge): you pick a folder and it stores `datos.json`, one file per order (`pedidos/`), one per invoice (`facturas/`) and a daily copy (`copias/`).
-- **Google Drive** (also works on your phone): the same files, in a folder called *Tarifa3D - Presupuestos* in your Drive. The app can only see files it created itself, not the rest of your Drive.
+- **Google Drive** (also works on your phone): the same files, in a folder called *PlateQuote - Presupuestos* in your Drive. The app can only see files it created itself, not the rest of your Drive.
 
 In both cases **data is merged, never overwritten**: if you open the calculator on two devices, the most recent version of each order, customer or spool wins and nothing is lost. Every change is saved automatically; changes from other devices arrive within seconds.
 
@@ -104,6 +104,10 @@ While you are not connected, whatever you do is saved on the device and uploaded
 ## Running your own copy
 
 The code is a single HTML file (dependency-free JavaScript) published with GitHub Pages. To store data in your own Drive you need to create a Google OAuth client ID (web application type) with the `drive.file` scope and add your GitHub Pages origin as an authorised origin; then paste it in Settings → "Where data is saved" or in the publishing configuration. No database or server is needed.
+
+## About ConArte3D
+
+PlateQuote is built and used by **ConArte3D**, a small 3D printing workshop in Antequera, Spain. To see what we make with it, follow us on Instagram: **[@conarte3d](https://www.instagram.com/conarte3d/)**.
 
 ## Support the project
 

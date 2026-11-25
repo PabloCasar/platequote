@@ -1,8 +1,8 @@
-# Tarifa 3D · Calculadora de precios para impresión 3D
+# PlateQuote · Calculadora de precios para impresión 3D
 
 **Calculadora de precios, pedidos y facturas para quien vende piezas impresas en 3D.** Funciona en el navegador, sin servidor ni cuenta de pago, y guarda los datos en tu propio Google Drive o en una carpeta de tu ordenador. Se puede instalar en el móvil como una app.
 
-> **Abrir la calculadora:** https://pablocasar.github.io/tarifa3d/Presupuestos/
+> **Abrir la calculadora:** https://pablocasar.github.io/platequote/Presupuestos/
 >
 > **English:** [README.en.md](README.en.md)
 
@@ -73,7 +73,7 @@ Puedes guardar en cada pieza o producto un **precio de mercado** (media, rango y
 La calculadora **no tiene servidor propio**: tus datos nunca pasan por mí ni por ningún tercero salvo el sitio que elijas.
 
 - **Carpeta del ordenador** (Chrome o Edge de escritorio): eliges una carpeta y se guardan ahí `datos.json`, un archivo por pedido (`pedidos/`), uno por factura (`facturas/`) y una copia diaria (`copias/`).
-- **Google Drive** (sirve también en el móvil): los mismos archivos, en una carpeta llamada *Tarifa3D - Presupuestos* de tu Drive. La app solo puede ver los archivos que ella misma crea, no el resto de tu Drive.
+- **Google Drive** (sirve también en el móvil): los mismos archivos, en una carpeta llamada *PlateQuote - Presupuestos* de tu Drive. La app solo puede ver los archivos que ella misma crea, no el resto de tu Drive.
 
 En los dos casos, **los datos se combinan, nunca se sustituyen**: si abres la calculadora en dos dispositivos, gana la versión más reciente de cada pedido, cliente o bobina, y no se pierde nada. Cada cambio se guarda solo; los de otros dispositivos llegan en unos segundos.
 
@@ -104,6 +104,10 @@ Mientras no estés conectado, lo que hagas se guarda en el dispositivo y se sube
 ## Para quien quiera montar su propia copia
 
 El código es un único archivo HTML (JavaScript sin dependencias), que se publica con GitHub Pages. Para guardar en tu propio Drive hace falta crear un ID de cliente de Google (OAuth, tipo aplicación web) con el permiso `drive.file` y poner tu origen de GitHub Pages como origen autorizado; después, pegarlo en Tarifas → «Dónde se guarda» o en la configuración de publicación. No se necesita ninguna base de datos ni servidor.
+
+## Sobre ConArte3D
+
+PlateQuote lo hace y lo usa **ConArte3D**, un pequeño taller de impresión 3D de Antequera. Si quieres ver lo que hacemos con ella, síguenos en Instagram: **[@conarte3d](https://www.instagram.com/conarte3d/)**.
 
 ## Apoyar el proyecto
 

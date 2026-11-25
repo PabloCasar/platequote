@@ -1,6 +1,6 @@
 {
-  "name": "Tarifa 3D · Calculadora de precios",
-  "short_name": "Tarifa 3D",
+  "name": "PlateQuote · Calculadora de precios",
+  "short_name": "PlateQuote",
   "description": "Presupuestos, pedidos y facturas de impresión 3D",
   "lang": "es",
   "start_url": "./",
