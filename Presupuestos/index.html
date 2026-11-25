@@ -1360,8 +1360,13 @@ function gToken(){
         if (r.error) return w.rej(new Error(r.error_description || r.error));
         gTok = r.access_token; gTokExp = Date.now() + (num(r.expires_in) || 3600) * 1000; w.res(); },
       error_callback: e => { const w = gWait; gWait = null; if (w) w.rej(new Error(e && e.type === "popup_closed" ? "se cerró la ventana de Google" : (e && (e.message || e.type)) || "cancelado")); }});
-    gClient.requestAccessToken({prompt: lsGet("tarifa3d.gok") ? "" : "consent"});
+    const hint = lsGet("tarifa3d.gmail") || "";
+    gClient.requestAccessToken(Object.assign({prompt: lsGet("tarifa3d.gok") ? "" : "consent"}, hint ? {hint} : {}));
   });
+}
+// recuerda la cuenta de Google para que el reinicio de sesión sea silencioso
+async function rememberAccount(){
+  try { const u = (await (await gfetch("https://www.googleapis.com/drive/v3/about?fields=user(emailAddress)")).json()).user; if (u && u.emailAddress) lsSet("tarifa3d.gmail", u.emailAddress); } catch(e){}
 }
 async function gfetch(url, opt){
   opt = opt || {};
@@ -1430,7 +1435,9 @@ function driveStore(){
 }
 // renueva el token aprovechando un toque del usuario cuando le quedan menos de 5 minutos
 document.addEventListener("pointerdown", () => {
-  if (!store || store.kind !== "drive" || fileState !== "ok" || gWait) return;
+  if (!store || store.kind !== "drive" || gWait) return;
+  if (fileState === "permission" && lsGet("tarifa3d.gok")){ connectDrive(true); return; }   // reconexión automática con el primer toque
+  if (fileState !== "ok") return;
   if (gTok && Date.now() > gTokExp - 5*60e3) gToken().then(() => writeAll()).catch(() => {});
 }, true);
 
@@ -1524,7 +1531,9 @@ async function initStorage(){
   DB = normalize(d); resetSeen();
   if (lsGet("tarifa3d.store") === "drive" && DRIVE_OK()){
     store = driveStore(); fileState = "permission"; lastErr = "";
-    loadGis().catch(e => { lastErr = e.message; renderFileChip(); });
+    // intento silencioso al abrir (si el navegador no permite la ventana, se reconecta con el primer toque)
+    loadGis().then(() => { if (lsGet("tarifa3d.gok") && fileState === "permission" && !gWait) connectDrive(true); })
+      .catch(e => { lastErr = e.message; renderFileChip(); });
     return;
   }
   if (DRIVE_OK()) loadGis().catch(() => {});
@@ -1548,17 +1557,17 @@ async function pickFolder(){
   try { await connectDir(h); } catch(e){ storeFailed(e); toast("No se pudo usar la carpeta: " + e.message); }
 }
 // conecta (o reconecta) con Google Drive; se llama desde un clic
-async function connectDrive(){
+async function connectDrive(quiet){
   if (!DRIVE_OK()) return toast("Falta el ID de cliente de Google (Tarifas → Dónde se guarda)");
   try {
-    await gToken(); lsSet("tarifa3d.gok", "1");
+    await gToken(); lsSet("tarifa3d.gok", "1"); rememberAccount();
     const again = store && store.kind === "drive";
     if (!again){ store = null; fileState = "none"; }
     lsSet("tarifa3d.store", "drive");
     await useStore(again ? store : driveStore(), "Guardando en Google Drive");
   } catch(e){
     if (store && store.kind === "drive") storeFailed(e.auth ? e : Object.assign(e, {auth:true}));
-    toast("No se pudo conectar con Google Drive: " + e.message);
+    if (!quiet) toast("No se pudo conectar con Google Drive: " + e.message);
   }
 }
 async function reconnect(){
