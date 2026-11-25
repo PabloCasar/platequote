@@ -382,6 +382,85 @@ dialog.ask .row-actions{justify-content:flex-end}
   .ltable td:first-child{max-width:none}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- inicio (panel) y movimiento ---------- */
+:root{--ch1:var(--c-labor);--ch2:var(--c-mat);--ease:cubic-bezier(.22,.8,.3,1)}
+:root[data-palette="conarte"]{--ch1:#5B4BA8;--ch2:#D9651F}
+@media (prefers-color-scheme:dark){:root[data-palette="conarte"]:not([data-theme="light"]){--ch1:#7F69D8;--ch2:#D96F3C}}
+:root[data-palette="conarte"][data-theme="dark"]{--ch1:#7F69D8;--ch2:#D96F3C}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#brand{cursor:pointer}
+.tabs{position:relative;padding-bottom:3px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-ink{position:absolute;left:0;bottom:0;height:2px;width:100px;transform-origin:0 50%;background:var(--accent);border-radius:2px;pointer-events:none;transition:transform .34s var(--ease)}
+.hero{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;margin-bottom:18px}
+.hero h1{font-size:28px;letter-spacing:-.02em}
+.hero p{margin:4px 0 0;color:var(--muted)}
+.hero .row-actions{margin-left:auto}
+.home-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.home-grid > .panel{grid-column:span 12}
+.home-grid > .hw-4{grid-column:span 4}
+.home-grid > .hw-5{grid-column:span 5}
+.home-grid > .hw-7{grid-column:span 7}
+@media (max-width:1020px){ .home-grid > .hw-4{grid-column:span 6} }
+@media (max-width:900px){ .home-grid > .hw-4,.home-grid > .hw-5,.home-grid > .hw-7{grid-column:span 12} }
+.kpi small{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
+.navgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:12px;margin-bottom:18px}
+#homeBody .kpis{grid-template-columns:repeat(auto-fit,minmax(148px,1fr))}
+.navcard{appearance:none;text-align:left;display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s,border-color .2s}
+.navcard:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.navcard:active{transform:scale(.98);transition-duration:.08s}
+.navcard .nc-ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.navcard b{font-size:15px}
+.navcard .nc-sub{font-size:13px;color:var(--muted)}
+.alerts{display:grid;gap:8px}
+.alert{display:flex;gap:12px;align-items:center;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);text-align:left;font:inherit;color:inherit;transition:transform .2s var(--ease),border-color .2s,background .2s}
+button.alert{cursor:pointer}
+button.alert:hover{border-color:var(--line-strong);background:var(--sunk);transform:translateX(3px)}
+.alert .ic{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;background:var(--sunk)}
+.alert.sev-warn .ic{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}
+.alert.sev-info .ic{background:color-mix(in srgb,var(--info) 16%,transparent);color:var(--info)}
+.alert.sev-ok .ic{background:var(--good-soft);color:var(--good)}
+.alert b{display:block;font-weight:600}
+.alert small{display:block;color:var(--muted);font-size:13px}
+.alert .go{margin-left:auto;color:var(--muted);font-size:18px}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font:11.5px var(--sans);fill:var(--muted)}
+.chart text.val{fill:var(--ink);font-weight:600}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.gbar{transform-box:fill-box;transform-origin:50% 100%}
+.gbar:hover,.gbar:focus{opacity:.8;outline:none}
+.legend-row{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 8px;font-size:13px;color:var(--muted)}
+.legend-row i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.hbars{display:grid;gap:10px}
+.hb{display:grid;grid-template-columns:84px minmax(0,1fr) 30px;gap:10px;align-items:center;font-size:13.5px;cursor:pointer;background:none;border:0;padding:2px 0;text-align:left;color:inherit;font-family:inherit;border-radius:6px}
+.hb:hover .tr{background:var(--line)}
+.hb .tr{height:12px;border-radius:6px;background:var(--sunk);overflow:hidden;transition:background .2s}
+.hb .tr i{display:block;height:100%;border-radius:6px;background:var(--st);transform-origin:left}
+.hb .n{text-align:right;font-family:var(--mono)}
+.split{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:2px;background:var(--sunk);margin:4px 0 12px}
+.split i{display:block;height:100%;transform-origin:left}
+.recent{list-style:none;margin:0;padding:0}
+.recent li button{display:flex;gap:10px;align-items:center;width:100%;padding:9px 6px;border:0;border-bottom:1px solid var(--line);background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;border-radius:6px;transition:background .15s}
+.recent li:last-child button{border-bottom:0}
+.recent li button:hover{background:var(--sunk)}
+.recent .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.recent .m{font-family:var(--mono);font-size:13px}
+.recent .d{width:9px;height:9px;border-radius:50%;background:var(--st);flex:none}
+.tip{position:fixed;z-index:60;left:0;top:0;pointer-events:none;padding:6px 10px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:12.5px;line-height:1.35;box-shadow:var(--shadow);opacity:0;transition:opacity .12s;max-width:260px}
+.tip.on{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  .view.enter{animation:viewIn .34s var(--ease) both}
+  @keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .anim .rise{animation:viewIn .5s var(--ease) both;animation-delay:calc(var(--i,0)*55ms)}
+  .anim .gbar{animation:growY .7s var(--ease) both;animation-delay:calc(var(--i,0)*45ms + 180ms)}
+  @keyframes growY{from{transform:scaleY(0)}}
+  .anim .hb .tr i,.anim .split i{animation:growX .7s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 200ms)}
+  @keyframes growX{from{transform:scaleX(0)}}
+  .kpi{transition:transform .25s var(--ease),box-shadow .25s}
+  .kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+}
+@media (prefers-reduced-motion:reduce){ .tab-ink,.navcard,.alert,.kpi{transition:none} }
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="iconos/favicon-32.png" sizes="32x32">
@@ -397,6 +476,7 @@ dialog.ask .row-actions{justify-content:flex-end}
   <div class="top-in">
     <div class="brand" id="brand"></div>
     <nav class="tabs" role="tablist">
+      <button class="tab" role="tab" data-view="home">Inicio</button>
       <button class="tab" role="tab" data-view="calc">Calcular</button>
       <button class="tab" role="tab" data-view="catalog">Catálogo</button>
       <button class="tab" role="tab" data-view="orders">Pedidos</button>
@@ -404,6 +484,7 @@ dialog.ask .row-actions{justify-content:flex-end}
       <button class="tab" role="tab" data-view="spools">Bobinas</button>
       <button class="tab" role="tab" data-view="report">Resumen</button>
       <button class="tab" role="tab" data-view="set">Tarifas</button>
+      <span class="tab-ink" id="tabInk" aria-hidden="true"></span>
     </nav>
     <button class="themebtn langbtn" id="langBtn" type="button" data-noi18n>EN</button>
     <button class="themebtn" id="themeBtn" type="button"></button>
@@ -413,7 +494,16 @@ dialog.ask .row-actions{justify-content:flex-end}
 
 <main>
 <!-- ================= CALCULAR ================= -->
-<section class="view" id="view-calc">
+<!-- ================= INICIO ================= -->
+<section class="view" id="view-home" data-noi18n>
+  <div class="hero">
+    <div><h1 id="homeTitle"></h1><p id="homeSub"></p></div>
+    <div class="row-actions"><button type="button" class="btn primary" id="homeNew"></button></div>
+  </div>
+  <div id="homeBody"></div>
+</section>
+
+<section class="view" id="view-calc" hidden>
   <div id="banner"></div>
   <div class="calc">
     <div id="editor">
@@ -533,6 +623,16 @@ dialog.ask .row-actions{justify-content:flex-end}
           <label class="field"><span>Tipo</span><select id="dKind"><option value="pct">Porcentaje</option><option value="eur">Importe fijo</option></select></label>
           <label class="field"><span>Valor</span><div class="unit"><input class="n" id="dValue" inputmode="decimal"><em id="dUnit">%</em></div></label>
           <label class="field" id="dNoteField"><span>Texto en el presupuesto</span><input id="dNote" placeholder="Descuento amigo"></label>
+        </div>
+        <div class="row">
+          <span class="lab">Precio final</span>
+          <label class="field" style="max-width:220px"><span>Total del pedido (cliente)</span><div class="unit"><input class="n" id="ftInput" inputmode="decimal" placeholder="auto"><em id="ftUnit" data-noi18n>€</em></div><small id="ftNote" data-noi18n></small></label>
+          <div class="row-actions" id="ftQuick" style="flex:none;padding-bottom:4px">
+            <button type="button" class="btn sm" data-ftr="1">Al alza a 1 €</button>
+            <button type="button" class="btn sm" data-ftr="5">Al alza a 5 €</button>
+            <button type="button" class="btn sm" data-ftr="10">Al alza a 10 €</button>
+            <button type="button" class="btn ghost sm" data-ftr="0">Quitar redondeo</button>
+          </div>
         </div>
       </div>
     </div>
@@ -781,6 +881,7 @@ dialog.ask .row-actions{justify-content:flex-end}
    Formato y procedimiento del estudio de mercado: Presupuestos/LEEME.md
    ===================================================================== */
 const KEY = "tarifa3d.v2";
+const BUILD_BRAND = {"theme":"conarte","name":"ConArte3D","tagline":"Hecho capa a capa. Creado contigo.","symbol":"../ConArte3D/ConArte3D_kit_marca/01_logos/simbolo_compacto.svg","wordmark":"../ConArte3D/ConArte3D_kit_marca/01_logos/nombre_color.svg","wordmarkDark":"../ConArte3D/ConArte3D_kit_marca/01_logos/nombre_blanco.svg","thanks":"Gracias por dar forma a tus ideas."};   // lo rellena publicar.ps1 con la marca de movil/config.json
 const ICON_X = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 const ICON_PLUS = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
 const STATUSES = [
@@ -862,7 +963,7 @@ function newOrder(){
   const now = new Date().toISOString();
   return {id:uid(), created:now, updated:now, title:"", client:"", notes:"", status:"borrador",
     platform:"directa", packaging:num(S.defPackaging), shipping:0, shipMode:"no", paidAt:null, deducted:null, snap:null,
-    defaults:settingsDefaults(), profitMode:"pieza", profitValue:null, discount:{type:"", kind:"pct", value:0, note:""}, lines:[newLine()]};
+    defaults:settingsDefaults(), profitMode:"pieza", profitValue:null, discount:{type:"", kind:"pct", value:0, note:""}, finalTotal:null, lines:[newLine()]};
 }
 const orderOf = l => DB.orders.find(o => o.lines.includes(l));
 // valor efectivo de un parámetro general en una pieza
@@ -936,6 +1037,7 @@ const $$ = s => [...document.querySelectorAll(s)];
 const num = v => { const n = parseFloat(String(v ?? "").replace(/\s/g,"").replace(",", ".")); return isFinite(n) ? n : 0; };
 // idioma de la interfaz (por usuario) y formatos de número, moneda y fecha
 let LANG = (() => { try { const l = localStorage.getItem("tarifa3d.lang"); if (l) return l; } catch(e){} return /^es/i.test(navigator.language || "es") ? "es" : "en"; })();
+const H = (es, en) => LANG === "en" ? en : es;
 let LOCALE = "es-ES", fmtE = new Intl.NumberFormat("es-ES", {style:"currency", currency:"EUR"});
 // monedas disponibles (ISO 4217); los importes no se convierten, solo cambia cómo se muestran
 const CURRENCIES = ["EUR","USD","GBP","CHF","CAD","AUD","MXN","ARS","CLP","COP","PEN","UYU","BRL","SEK","NOK","DKK","PLN","CZK","HUF","RON","JPY","CNY"];
@@ -1093,10 +1195,13 @@ function calcOrder(order, over){
   const d = order.discount || {};
   let dAmt = 0;
   if (d.type && num(d.value) > 0) dAmt = Math.round(Math.min(goods, d.kind === "eur" ? num(d.value) : goods*num(d.value)/100)*100)/100;
-  rows.forEach(r => { r.dAmt = goods > 0 ? dAmt * r.goods/goods : 0; r.profit = (r.goods - r.dAmt)*kk - r.feeShare - r.cost - r.alloc; });
   const shipCost = order.shipMode === "cobrar" ? num(order.shipping) : 0;
   const shipGross = Math.ceil((shipCost/kk)*100 - 1e-6)/100;
-  const total = goods - dAmt + shipGross;
+  // redondeo manual: el usuario fija el total del cliente y la diferencia se reparte entre las piezas
+  const ft = over.noFinal ? 0 : num(order.finalTotal);
+  const rAmt = ft > 0 ? Math.round((ft - (goods - dAmt + shipGross))*100)/100 : 0;
+  rows.forEach(r => { r.dAmt = goods > 0 ? dAmt * r.goods/goods : 0; r.rAmt = goods > 0 ? rAmt * r.goods/goods : 0; r.profit = (r.goods - r.dAmt + r.rAmt)*kk - r.feeShare - r.cost - r.alloc; });
+  const total = goods - dAmt + shipGross + rAmt;
   const net = total/vatF, vat = total - net, fees = total*p + F;
   const o = {mat:0, energy:0, amort:0, fail:0, labor:0, finish:0, extras:0, accs:0, design:0};
   rows.forEach(r => { for (const k in o) o[k] += r.o[k]; });
@@ -1104,13 +1209,13 @@ function calcOrder(order, over){
   const cost = sumCost + orderFixed;
   const profit = net - fees - cost - shipCost;
   const dPreset = S.discountPresets.find(x => x.id === d.type);
-  return {rows, o, cost, goods, dAmt, dLabel: d.note || ("Descuento " + (dPreset ? dPreset.name.toLowerCase() : "")).trim(),
+  return {rows, o, cost, goods, dAmt, rAmt, dLabel: d.note || ("Descuento " + (dPreset ? dPreset.name.toLowerCase() : "")).trim(),
     shipCost, shipGross, total, vat, fees, profit, net, vatF, platform:pl.name, platformId:pl.id,
     margin: net > 0 ? profit/net : 0, markupReal: cost > 0 ? profit/cost : 0, units: rows.reduce((a,r)=>a+r.q,0)};
 }
 function snapshot(order){
   const r = calcOrder(order); if (r.error) return null;
-  return {total:r.total, goods:r.goods, dAmt:r.dAmt, shipGross:r.shipGross, vat:r.vat, fees:r.fees, cost:r.cost, profit:r.profit, units:r.units};
+  return {total:r.total, goods:r.goods, dAmt:r.dAmt, rAmt:r.rAmt, shipGross:r.shipGross, vat:r.vat, fees:r.fees, cost:r.cost, profit:r.profit, units:r.units};
 }
 const figures = o => o.snap || snapshot(o);
 
@@ -1790,6 +1895,7 @@ function fillAdjust(){
   $("#dType").innerHTML = `<option value="">Sin descuento</option>` + S.discountPresets.map(p => `<option value="${esc(p.id)}">${esc(p.name)} (${fmtN(p.pct)} %)</option>`).join("") + `<option value="otro">Otro</option>`;
   $("#dType").value = d.type || ""; if ($("#dType").value !== (d.type || "")) $("#dType").value = "otro";
   $("#dKind").value = d.kind || "pct"; $("#dValue").value = d.type ? showNum(d.value) : ""; $("#dNote").value = d.note || "";
+  $("#ftInput").value = num(o.finalTotal) > 0 ? showNum(o.finalTotal) : "";
   updateDiscFields();
 }
 function updatePv(){
@@ -1803,6 +1909,24 @@ function updatePv(){
     inp.value = showNum(o.profitValue);
   }
 }
+// nota bajo el precio final: lo calculado y cuánto se ajusta
+function updateFt(){
+  const note = $("#ftNote"), o = cur(); if (!note || !o) return;
+  $("#ftUnit").textContent = CSYM;
+  const r = calcOrder(o, {noFinal:true}); if (r.error){ note.textContent = ""; return; }
+  const ft = num(o.finalTotal), d = ft - r.total, sg = d >= 0 ? "+" : "−";
+  note.textContent = ft > 0
+    ? H(`Calculado ${eur(r.total)} · ajuste ${sg}${eur(Math.abs(d))}`, `Calculated ${eur(r.total)} · adjustment ${sg}${eur(Math.abs(d))}`)
+    : H(`Vacío = el calculado (${eur(r.total)})`, `Empty = as calculated (${eur(r.total)})`);
+}
+$("#adjPanel").addEventListener("click", e => {
+  const b = e.target.closest("[data-ftr]"); if (!b) return;
+  const o = cur(), step = num(b.dataset.ftr);
+  if (!step) o.finalTotal = null;
+  else { const r = calcOrder(o, {noFinal:true}); if (r.error) return; o.finalTotal = Math.round(Math.ceil(r.total / step - 1e-9) * step * 100) / 100; }
+  $("#ftInput").value = num(o.finalTotal) > 0 ? showNum(o.finalTotal) : "";
+  persist(); renderSummary();
+});
 function updateDiscFields(){
   const d = cur().discount, on = !!d.type;
   $("#dKind").disabled = !on; $("#dValue").disabled = !on; $("#dNote").disabled = !on;
@@ -1812,6 +1936,7 @@ $("#adjPanel").addEventListener("input", e => {
   const o = cur(), d = o.discount, t = e.target;
   if (t.name === "pm"){ o.profitMode = t.value; o.profitValue = null; updatePv(); }
   else if (t.id === "pvInput") o.profitValue = num(t.value);
+  else if (t.id === "ftInput") o.finalTotal = String(t.value).trim() === "" ? null : num(t.value);
   else if (t.id === "dType"){
     d.type = t.value;
     const p = S.discountPresets.find(x => x.id === t.value);
@@ -1914,6 +2039,7 @@ $("#marketPanel").addEventListener("click", async e => {
 
 /* ---------- resumen ---------- */
 function renderSummary(){
+  try { updateFt(); } catch(e){}
   const o = cur(), r = calcOrder(o), el = $("#summary");
   $("#invBtnTxt").textContent = orderInvoice(o) ? "Ver factura" : "Factura";
   if (r.error){ el.innerHTML = `<div class="sum-head"><p class="warn">${esc(r.error)}</p></div>`; return; }
@@ -1939,14 +2065,15 @@ function renderSummary(){
   const crows = chans.map(c => `<tr class="${c.p.id===r.platformId?"cur":""} ${c===best && chans.length>1?"best":""}" data-chan="${esc(c.p.id)}" title="Usar ${esc(c.p.name)}"><td>${esc(c.p.name)}</td><td>${eur(c.x.total)}</td><td>${eur(c.x.fees)}</td><td>${eur(c.x.profit)}</td></tr>`).join("");
   const warns = r.rows.filter(x => x.profit < 0).map(x => `<p class="warn">«${esc(x.l.name || "Pieza")}» pierde dinero a ${eur(x.unit)}${r.dAmt ? " con el descuento" : ""}. Mínimo sin pérdidas: ${eur(x.minUnit)}/ud.</p>`).join("");
   const noTime = r.rows.some(x => !secsOf(x.l));
-  const unitShown = single ? (sel.unit - sel.dAmt/sel.q) : r.total;
+  const unitShown = single ? (sel.unit - sel.dAmt/sel.q + sel.rAmt/sel.q) : r.total;
   el.innerHTML = `
     <div class="sum-head">
       <div class="lbl">${single ? (sel.q > 1 ? `Precio por unidad · ${sel.q} uds` : "Precio de venta") : `Total del pedido · ${r.units} uds`}${S.vatOn ? " · IVA incl." : ""}</div>
       <div class="price">${eur(unitShown)}</div>
       <div class="sum-sub">
         ${r.dAmt > 0 ? `<span class="disc">${esc(r.dLabel)} <b>−${eur(r.dAmt)}</b></span>` : ""}
-        ${single && sel.q > 1 ? `<span>Pedido <b>${eur(r.goods - r.dAmt)}</b></span>` : ""}
+        ${r.rAmt ? `<span class="disc">Redondeo manual <b>${r.rAmt > 0 ? "+" : "−"}${eur(Math.abs(r.rAmt))}</b></span>` : ""}
+        ${single && sel.q > 1 ? `<span>Pedido <b>${eur(r.goods - r.dAmt + r.rAmt)}</b></span>` : ""}
         ${r.shipGross > 0 ? `<span>+ envío <b>${eur(r.shipGross)}</b></span>` : ""}
         ${single ? `<span>Total cliente <b>${eur(r.total)}</b></span>` : ""}
         ${sel.disc > 0 ? `<span>Desc. cantidad <b>${fmtN(sel.disc)} %</b></span>` : ""}
@@ -1960,6 +2087,7 @@ function renderSummary(){
         <li class="sep"><span class="dot" style="background:transparent"></span>Coste del pedido<span class="v">${eur(r.cost)}</span></li>
         ${after.filter(s => s[0] !== "Beneficio").map(li).join("")}
         ${r.dAmt > 0 ? `<li class="neg"><span class="dot" style="background:transparent"></span>${esc(r.dLabel)} (ya restado)<span class="v">−${eur(r.dAmt)}</span></li>` : ""}
+        ${r.rAmt ? `<li class="neg"><span class="dot" style="background:transparent"></span>Redondeo manual<span class="v">${r.rAmt > 0 ? "+" : "−"}${eur(Math.abs(r.rAmt))}</span></li>` : ""}
       </ul>
       <div class="profit"><span>Beneficio neto · ${fmtN(r.markupReal*100,1)} % sobre coste · ${fmtN(r.margin*100,1)} % del precio</span><b class="${r.profit<0?"neg":""}">${eur(r.profit)}</b></div>
       ${warns}
@@ -2005,6 +2133,7 @@ function docSnapshot(o, r){
     issuer:{name:S.bizName || S.brandName || "", nif:S.bizNif, address:S.bizAddress || S.bizContact, email:S.bizEmail, phone:S.bizPhone, web:S.bizWeb, iban:S.bizIban},
     client:{name:c.name || "", company:c.company || "", nif:c.nif || "", address:[c.address, [c.zip, c.city].filter(Boolean).join(" "), c.province, c.country].filter(Boolean).join("\n"), email:c.email || "", phone:c.phone || ""},
     rows:r.rows.map(x => ({name:x.l.name, desc:x.l.desc, qty:x.q, unit:x.unit, amount:x.goods, qtyDisc:x.disc > 0 && !(num(x.l.priceOverride) > 0) ? x.disc : 0})),
+    rounding:r.rAmt ? {amount:r.rAmt} : null,
     discount:r.dAmt > 0 ? {label:r.dLabel, pct:o.discount.kind === "pct" ? num(o.discount.value) : null, amount:r.dAmt} : null,
     shipping:r.shipGross, base:r.total / r.vatF, vat:r.vat, total:r.total
   };
@@ -2031,6 +2160,7 @@ function renderDoc(kind, d, meta){
     <table><thead><tr><th>${L.concept}</th><th class="r">${L.qty}</th><th class="r">${L.unitPrice}</th><th class="r">${L.amount}</th></tr></thead><tbody>
       ${d.rows.map(x => `<tr><td>${esc(x.name || L.defaultItem)}${x.desc ? `<br><small>${esc(x.desc)}</small>` : ""}${x.qtyDisc ? `<br><small>${fill(L.qtyDisc, "p", fmtN(x.qtyDisc))}</small>` : ""}</td><td class="r">${x.qty}</td><td class="r">${money(x.unit)}</td><td class="r">${money(x.amount)}</td></tr>`).join("")}
       ${d.discount ? `<tr><td>${esc(d.discount.label)}${d.discount.pct ? ` (${fmtN(d.discount.pct)} %)` : ""}</td><td></td><td></td><td class="r">−${money(d.discount.amount)}</td></tr>` : ""}
+      ${d.rounding ? `<tr><td>${L.round || (meta.lang === "en" ? "Rounding adjustment" : "Ajuste por redondeo")}</td><td></td><td></td><td class="r">${d.rounding.amount > 0 ? "+" : "−"}${money(Math.abs(d.rounding.amount))}</td></tr>` : ""}
       ${d.shipping > 0 ? `<tr><td>${L.shipping}</td><td class="r">1</td><td class="r">${money(d.shipping)}</td><td class="r">${money(d.shipping)}</td></tr>` : ""}
     </tbody></table>
     <table class="tot">
@@ -2417,6 +2547,12 @@ function renderReport(){
 /* ---------- marca ---------- */
 const GENERIC_ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent)"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6"/></svg>';
 function applyBrand(){
+  // versión publicada: si los datos aún no traen marca, se usa la de la instalación
+  if (BUILD_BRAND && !S.brandName){
+    S.theme = BUILD_BRAND.theme || S.theme; S.brandName = BUILD_BRAND.name || ""; S.brandTagline = BUILD_BRAND.tagline || "";
+    S.brandSymbol = BUILD_BRAND.symbol || ""; S.brandWordmark = BUILD_BRAND.wordmark || ""; S.brandWordmarkDark = BUILD_BRAND.wordmarkDark || "";
+    if (!S.docThanks) S.docThanks = BUILD_BRAND.thanks || "";
+  }
   document.documentElement.dataset.palette = S.theme === "conarte" ? "conarte" : "neutral";
   const name = S.brandName || "Tarifa 3D";
   const sym = S.brandSymbol ? `<img class="sym" src="${esc(S.brandSymbol)}" alt="" onerror="this.remove()">` : GENERIC_ICON;
@@ -2883,7 +3019,7 @@ const EN = {
   "Canal de venta":"Sales channel","Estado":"Status","Envío":"Shipping","Sin envío":"No shipping","Se cobra aparte":"Charged separately","Incluido en el precio":"Included in the price",
   "Coste del envío":"Shipping cost","Embalaje":"Packaging","Por pedido":"Per order","IVA":"VAT","Aplicar IVA":"Apply VAT","Vale para todos los pedidos":"Applies to all orders",
   "Redondeo del precio":"Price rounding","Siempre hacia arriba":"Always rounds up","Valores generales para todas las piezas":"Default values for all parts",
-  "Margen":"Margin","Conecta con Google Drive para guardar":"Connect Google Drive to save","Google pide confirmarlo al abrir y cada hora más o menos. Lo que cambies antes no se pierde: se combina con lo guardado.":"Google asks you to confirm when you open the app and roughly every hour. Nothing you change meanwhile is lost: it is merged with what is saved.","Conectar con Google Drive":"Connect Google Drive","Conectar Drive":"Connect Drive","Guardar en Google Drive":"Save to Google Drive","Dejar de usar Google Drive":"Stop using Google Drive","Pasar a Google Drive":"Move to Google Drive","Google Drive (para usarla en el móvil)":"Google Drive (to use it on your phone)","ID de cliente de Google":"Google client ID","Ya viene incluido en esta versión publicada. Rellénalo solo para usar otro.":"Already included in this published version. Fill it in only to use a different one.","Sale de Google Cloud (ver instrucciones). Se guarda solo en este navegador.":"You get it from Google Cloud (see the instructions). It is stored only in this browser.","Conecta tu Google Drive para guardar los pedidos y verlos también en el ordenador. Mientras, quedan solo en este navegador.":"Connect your Google Drive to save your orders and see them on your computer too. Meanwhile they stay only in this browser.","Datos actualizados desde Google Drive":"Data updated from Google Drive","ID de Google guardado en este navegador":"Google ID saved in this browser","ID de Google quitado":"Google ID removed","Ya no se guarda en Google Drive. Los datos siguen en Drive y en este navegador.":"No longer saving to Google Drive. The data is still in Drive and in this browser.","Ese ID no parece de Google: termina en .apps.googleusercontent.com":"That does not look like a Google ID: it ends in .apps.googleusercontent.com","Falta el ID de cliente de Google (Tarifas → Dónde se guarda)":"The Google client ID is missing (Settings → Where data is saved)","Margen sobre coste":"Markup on cost","Margen sobre coste por defecto":"Default markup on cost","sobre coste":"on cost","del precio":"of price","Cambiarla no convierte importes: todo se entiende en esta moneda":"Changing it does not convert amounts: everything is read in this currency","Postprocesado":"Post-processing","Pintura":"Painting","Material de acabado":"Finishing materials","Extras":"Extras","Otros gastos por pieza":"Other costs per part",
+  "Margen":"Margin","Inicio":"Home","Precio final":"Final price","Total del pedido (cliente)":"Order total (customer)","Quitar redondeo":"Clear rounding","Redondeo manual":"Manual rounding","Conecta con Google Drive para guardar":"Connect Google Drive to save","Google pide confirmarlo al abrir y cada hora más o menos. Lo que cambies antes no se pierde: se combina con lo guardado.":"Google asks you to confirm when you open the app and roughly every hour. Nothing you change meanwhile is lost: it is merged with what is saved.","Conectar con Google Drive":"Connect Google Drive","Conectar Drive":"Connect Drive","Guardar en Google Drive":"Save to Google Drive","Dejar de usar Google Drive":"Stop using Google Drive","Pasar a Google Drive":"Move to Google Drive","Google Drive (para usarla en el móvil)":"Google Drive (to use it on your phone)","ID de cliente de Google":"Google client ID","Ya viene incluido en esta versión publicada. Rellénalo solo para usar otro.":"Already included in this published version. Fill it in only to use a different one.","Sale de Google Cloud (ver instrucciones). Se guarda solo en este navegador.":"You get it from Google Cloud (see the instructions). It is stored only in this browser.","Conecta tu Google Drive para guardar los pedidos y verlos también en el ordenador. Mientras, quedan solo en este navegador.":"Connect your Google Drive to save your orders and see them on your computer too. Meanwhile they stay only in this browser.","Datos actualizados desde Google Drive":"Data updated from Google Drive","ID de Google guardado en este navegador":"Google ID saved in this browser","ID de Google quitado":"Google ID removed","Ya no se guarda en Google Drive. Los datos siguen en Drive y en este navegador.":"No longer saving to Google Drive. The data is still in Drive and in this browser.","Ese ID no parece de Google: termina en .apps.googleusercontent.com":"That does not look like a Google ID: it ends in .apps.googleusercontent.com","Falta el ID de cliente de Google (Tarifas → Dónde se guarda)":"The Google client ID is missing (Settings → Where data is saved)","Margen sobre coste":"Markup on cost","Margen sobre coste por defecto":"Default markup on cost","sobre coste":"on cost","del precio":"of price","Cambiarla no convierte importes: todo se entiende en esta moneda":"Changing it does not convert amounts: everything is read in this currency","Postprocesado":"Post-processing","Pintura":"Painting","Material de acabado":"Finishing materials","Extras":"Extras","Otros gastos por pieza":"Other costs per part",
   "Todas las piezas los usan, salvo las que tengan valores propios.":"All parts use these unless they have their own values.",
   "Todas las piezas usan estos valores. Para cambiar una sola, desmarca «Usar los valores generales» en ella.":"All parts use these values. To change just one, untick “Use the order defaults” on it.",
   "pieza tiene valores propios; el resto usa estos.":"part has its own values; the rest use these.","piezas tienen valores propios; el resto usa estos.":"parts have their own values; the rest use these.",
@@ -3101,8 +3237,8 @@ const i18nObs = new MutationObserver(muts => {
   try {
     for (const m of muts){
       if (m.type === "childList") m.addedNodes.forEach(translateTree);
-      else if (m.type === "attributes") trAttrs(m.target);
-      else if (m.type === "characterData") trText(m.target);
+      else if (m.type === "attributes"){ if (!(m.target.closest && m.target.closest("[data-noi18n]"))) trAttrs(m.target); }
+      else if (m.type === "characterData"){ const pe = m.target.parentElement; if (!(pe && pe.closest("[data-noi18n]"))) trText(m.target); }
     }
   } finally { i18nBusy = false; }
 });
@@ -3142,17 +3278,239 @@ applyTheme(firstTheme === "auto" ? "auto" : (document.documentElement.dataset.th
 /* =====================================================================
    Vistas
    ===================================================================== */
-let view = "calc";
+/* =====================================================================
+   Inicio: panel con resumen, gráficas y avisos
+   (esta sección lleva data-noi18n: sus textos se eligen con H(es, en))
+   ===================================================================== */
+const ICONS = {
+  calc:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/>',
+  catalog:'<path d="M4 7l8-4 8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/>',
+  orders:'<path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>',
+  clients:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.2c2 .7 3.5 2.4 3.5 5.8"/>',
+  spools:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6"/>',
+  report:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  set:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>'
+};
+const ico = k => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]}</svg>`;
+const ST_EN = {borrador:"Draft", enviado:"Sent", aceptado:"Accepted", impreso:"Printed", cobrado:"Paid", rechazado:"Rejected"};
+const stName = id => LANG === "en" ? (ST_EN[id] || id) : stById(id).name;
+let homeAnim = false;
+const fmtK = v => v >= 1000 ? (v/1000).toLocaleString(LOCALE, {maximumFractionDigits:1}) + "k" : String(Math.round(v));
+function niceMax(v){ if (v <= 0) return 100; const p = Math.pow(10, Math.floor(Math.log10(v))), n = v/p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p; }
+
+// avisos: lo que conviene mirar hoy, de más a menos urgente
+function homeAlerts(){
+  const out = [], DAY = 864e5, now = Date.now();
+  const age = o => Math.floor((now - (Date.parse(o.updated) || now)) / DAY);
+  const orders = live().filter(o => !isBlank(o));
+  const s = n => n > 1;
+  const drive = store && store.kind === "drive";
+  if (fileState === "permission") out.push({sev:"warn", act:"file", t:H("Falta conectar para guardar", "Connect to keep saving"),
+    s: drive ? H("Toca aquí para conectar con Google Drive. Mientras, los cambios se guardan solo en este dispositivo.", "Tap to connect Google Drive. Until then, changes are saved on this device only.") : H("Toca aquí para dar permiso a la carpeta.", "Tap to allow access to the folder.")});
+  else if (fileState === "error") out.push({sev:"warn", act:"file", t:H("No se ha podido guardar", "Could not save"), s:lastErr || ""});
+  else if (fileState === "none" || fileState === "folder") out.push({sev:"info", act:"file", t:H("Tus datos solo están en este navegador", "Your data is only in this browser"), s:H("Elige dónde guardarlos para no perderlos.", "Choose where to store it so you don't lose it.")});
+  const unpaid = orders.filter(o => o.status === "impreso");
+  if (unpaid.length){
+    const tot = unpaid.map(figures).filter(Boolean).reduce((a, f) => a + f.total, 0), old = Math.max(...unpaid.map(age));
+    out.push({sev: old > 7 ? "warn" : "info", go:"orders",
+      t:H(`${unpaid.length} pedido${s(unpaid.length) ? "s" : ""} impreso${s(unpaid.length) ? "s" : ""} sin cobrar`, `${unpaid.length} printed order${s(unpaid.length) ? "s" : ""} not paid yet`),
+      s:H(`${eur(tot)} pendientes${old > 7 ? ` · el más antiguo, hace ${old} días` : ""}`, `${eur(tot)} outstanding${old > 7 ? ` · oldest ${old} days ago` : ""}`)});
+  }
+  const acc = orders.filter(o => o.status === "aceptado");
+  if (acc.length) out.push({sev:"info", go:"orders",
+    t:H(`${acc.length} pedido${s(acc.length) ? "s" : ""} aceptado${s(acc.length) ? "s" : ""} por imprimir`, `${acc.length} accepted order${s(acc.length) ? "s" : ""} to print`),
+    s:eur(acc.map(figures).filter(Boolean).reduce((a, f) => a + f.total, 0))});
+  const sent = orders.filter(o => o.status === "enviado" && age(o) > 7);
+  if (sent.length) out.push({sev:"info", go:"orders",
+    t:H(`${sent.length} presupuesto${s(sent.length) ? "s" : ""} sin respuesta`, `${sent.length} quote${s(sent.length) ? "s" : ""} with no answer`),
+    s:H("Enviados hace más de 7 días. Puede tocar preguntar.", "Sent more than 7 days ago. Maybe time to follow up.")});
+  const drafts = orders.filter(o => o.status === "borrador" && age(o) > 14);
+  if (drafts.length) out.push({sev:"info", go:"orders",
+    t:H(`${drafts.length} borrador${s(drafts.length) ? "es" : ""} sin terminar`, `${drafts.length} unfinished draft${s(drafts.length) ? "s" : ""}`),
+    s:H("Llevan más de 2 semanas sin tocarse.", "Untouched for more than 2 weeks.")});
+  const low = DB.spools.filter(b => num(b.remaining) > 0 && (num(b.remaining) <= 100 || num(b.remaining) <= 0.15 * num(b.weight)));
+  if (low.length) out.push({sev:"warn", go:"spools",
+    t:H(`${low.length} bobina${s(low.length) ? "s" : ""} casi vacía${s(low.length) ? "s" : ""}`, `${low.length} spool${s(low.length) ? "s" : ""} almost empty`),
+    s:low.slice(0, 3).map(b => `${matById(b.mat).name}${b.color ? " " + b.color : ""} · ${Math.round(num(b.remaining))} g`).join("  ·  ")});
+  out.sort((a, b) => (a.sev === "warn" ? 0 : 1) - (b.sev === "warn" ? 0 : 1));
+  return out.length ? out : [{sev:"ok", t:H("Todo en orden", "All good"), s:H("No hay nada pendiente.", "Nothing pending.")}];
+}
+
+function homeChart(months){
+  const W = 600, HH = 220, L = 40, T = 20, B = 26, R = 6, iw = W - L - R, ih = HH - T - B;
+  const max = niceMax(Math.max(...months.map(m => Math.max(m.total, m.profit, 0))));
+  const gw = iw / months.length, bw = Math.min(30, gw * 0.32), gap = 4, y = v => T + ih - (v / max) * ih;
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${HH}" role="img" aria-label="${esc(H("Facturado y beneficio por mes", "Billed and profit by month"))}">`;
+  for (const t of [0, .5, 1]){ const v = max * t; s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${fmtK(v)}</text>`; }
+  months.forEach((m, i) => {
+    const cx = L + gw * i + gw / 2;
+    [[m.total, "--ch1", H("Facturado", "Billed")], [m.profit, "--ch2", H("Beneficio", "Profit")]].forEach(([v, c, name], j) => {
+      if (!(v > 0)) return;
+      const x = cx + (j ? gap / 2 : -bw - gap / 2), h = Math.max(3, (v / max) * ih), tip = `${m.long} · ${name}: ${eur(v)}`;
+      s += `<rect class="gbar" style="--i:${i * 2 + j};fill:var(${c})" x="${x.toFixed(1)}" y="${(T + ih - h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="4" tabindex="0" data-tip="${esc(tip)}" aria-label="${esc(tip)}"/>`;
+      s += `<text class="val" x="${(x + bw / 2).toFixed(1)}" y="${(T + ih - h - 5).toFixed(1)}" text-anchor="middle">${fmtK(v)}</text>`;
+    });
+    s += `<text x="${cx.toFixed(1)}" y="${HH - 6}" text-anchor="middle"${m.cur ? ' style="font-weight:700;fill:var(--ink)"' : ""}>${esc(m.label)}</text>`;
+  });
+  return s + "</svg>";
+}
+
+function renderHome(){
+  const el = $("#homeBody"), anim = homeAnim; homeAnim = false;
+  const orders = live().filter(o => !isBlank(o)), now = new Date();
+  const rows = monthly(), byK = new Map(rows.map(r => [r.k, r]));
+  const months = [];
+  for (let i = 5; i >= 0; i--){
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1), k = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0"), r = byK.get(k) || {};
+    months.push({k, label:d.toLocaleDateString(LOCALE, {month:"short"}).replace(".", ""), long:d.toLocaleDateString(LOCALE, {month:"long", year:"numeric"}), total:r.total || 0, profit:r.profit || 0, cur:i === 0});
+  }
+  const m0 = months[5], m1 = months[4];
+  const yk = String(now.getFullYear()), yr = rows.filter(r => r.k.startsWith(yk)), sum = (a, k) => a.reduce((t, r) => t + r[k], 0);
+  const pend = orders.filter(o => o.status === "aceptado" || o.status === "impreso"), sentO = orders.filter(o => o.status === "enviado");
+  const tot = a => a.map(figures).filter(Boolean).reduce((t, f) => t + f.total, 0);
+  const dl = m1.total > 0 ? Math.round((m0.total - m1.total) / m1.total * 100) : null;
+  const ordN = n => H(`${n} pedido${n === 1 ? "" : "s"}`, `${n} order${n === 1 ? "" : "s"}`);
+
+  // cabecera
+  const dateTxt = now.toLocaleDateString(LOCALE, {weekday:"long", day:"numeric", month:"long"});
+  $("#homeTitle").textContent = S.brandName || "Tarifa 3D";
+  $("#homeSub").textContent = dateTxt.charAt(0).toUpperCase() + dateTxt.slice(1) + (S.brandTagline ? " · " + S.brandTagline : "");
+  $("#homeNew").textContent = "+ " + H("Nuevo pedido", "New order");
+
+  const kpis = [
+    [H("Facturado este mes", "Billed this month"), m0.total, dl === null ? H("Sin datos del mes anterior", "No data for last month") : `${dl >= 0 ? "▲" : "▼"} ${Math.abs(dl)} % ${H("frente al mes anterior", "vs last month")}`],
+    [H("Beneficio este mes", "Profit this month"), m0.profit, `${H("En el año", "This year")}: ${eur(sum(yr, "profit"))}`],
+    [H("Pendiente de cobro", "Awaiting payment"), tot(pend), ordN(pend.length)],
+    [H("Presupuestos enviados", "Quotes sent"), tot(sentO), ordN(sentO.length)]
+  ].map((k, i) => `<div class="kpi rise" style="--i:${i}"><span>${k[0]}</span><b data-count="${k[1]}">${eur(k[1])}</b><small>${esc(k[2])}</small></div>`).join("");
+
+  const openN = orders.filter(o => !["cobrado", "rechazado"].includes(o.status)).length;
+  const activeSp = DB.spools.filter(b => num(b.remaining) > 0), kg = activeSp.reduce((t, b) => t + num(b.remaining), 0) / 1000;
+  const co = cur();
+  const cards = [
+    ["calc", H("Calcular", "Calculate"), co && !isBlank(co) ? (co.title || clientName(co) || H("Pedido abierto", "Open order")) : H("Empezar un pedido", "Start an order")],
+    ["orders", H("Pedidos", "Orders"), H(`${openN} abiertos · ${orders.length} en total`, `${openN} open · ${orders.length} in total`)],
+    ["clients", H("Clientes", "Customers"), String(DB.clients.length)],
+    ["catalog", H("Catálogo", "Catalogue"), H(`${DB.products.length} productos`, `${DB.products.length} products`)],
+    ["spools", H("Bobinas", "Spools"), H(`${activeSp.length} activas · ${fmtN(kg, 1)} kg`, `${activeSp.length} active · ${fmtN(kg, 1)} kg`)],
+    ["report", H("Resumen", "Summary"), H(`${eur(sum(yr, "total"))} este año`, `${eur(sum(yr, "total"))} this year`)],
+    ["set", H("Tarifas", "Settings"), H(`${S.platforms.length} canales · ${S.materials.length} materiales`, `${S.platforms.length} channels · ${S.materials.length} materials`)]
+  ].map((c, i) => `<button type="button" class="navcard rise" style="--i:${i + 4}" data-go="${c[0]}"><span class="nc-ic">${ico(c[0])}</span><b>${c[1]}</b><span class="nc-sub">${esc(c[2])}</span></button>`).join("");
+
+  const alerts = homeAlerts(), real = alerts.filter(a => a.sev !== "ok").length;
+  const sevTxt = {warn:H("Atención", "Warning"), info:H("Aviso", "Notice"), ok:H("Bien", "OK")}, glyph = {warn:"!", info:"i", ok:"✓"};
+  const alertsHtml = alerts.map((a, i) => {
+    const inner = `<span class="ic" aria-hidden="true">${glyph[a.sev]}</span><span><span class="vh">${sevTxt[a.sev]}: </span><b>${esc(a.t)}</b><small>${esc(a.s || "")}</small></span>${a.go || a.act ? `<span class="go" aria-hidden="true">›</span>` : ""}`;
+    const attrs = `class="alert sev-${a.sev}${a.go || a.act ? "" : " plain"}" style="--i:${i}"`;
+    return a.go || a.act ? `<button type="button" ${attrs} ${a.go ? `data-go="${a.go}"` : `data-act="${a.act}"`}>${inner}</button>` : `<div ${attrs}>${inner}</div>`;
+  }).join("");
+
+  const anyPaid = months.some(m => m.total > 0 || m.profit > 0);
+  const chart = anyPaid
+    ? `<div class="legend-row"><span><i style="background:var(--ch1)"></i>${H("Facturado", "Billed")}</span><span><i style="background:var(--ch2)"></i>${H("Beneficio", "Profit")}</span><span>${H("Importes en", "Amounts in")} ${CSYM}</span></div>${homeChart(months)}`
+    : `<div class="empty"><b>${H("Aún no hay pedidos cobrados", "No paid orders yet")}</b>${H("Cuando marques un pedido como «Cobrado» aparecerá aquí.", "When you mark an order as “Paid” it will show up here.")}</div>`;
+
+  const counts = STATUSES.map(s => ({s, n:orders.filter(o => o.status === s.id).length})), maxN = Math.max(1, ...counts.map(c => c.n));
+  const statusHtml = orders.length
+    ? `<div class="hbars">${counts.map((c, i) => `<button type="button" class="hb" data-go="orders" data-tip="${esc(stName(c.s.id) + ": " + c.n)}" style="--st:${c.s.c}"><span>${esc(stName(c.s.id))}</span><span class="tr"><i style="--i:${i};width:${(c.n / maxN * 100).toFixed(1)}%"></i></span><span class="n">${c.n}</span></button>`).join("")}</div>`
+    : `<div class="empty"><b>${H("Todavía no hay pedidos", "No orders yet")}</b>${H("Crea el primero con «Nuevo pedido».", "Create the first one with “New order”.")}</div>`;
+
+  const yTotal = sum(yr, "total"), parts = [
+    [H("Costes", "Costs"), sum(yr, "cost"), "--c-labor"], [H("Comisiones", "Fees"), sum(yr, "fees"), "--c-fees"], [H("IVA", "VAT"), sum(yr, "vat"), "--c-vat"],
+    [H("Envío", "Shipping"), Math.max(0, yTotal - sum(yr, "cost") - sum(yr, "fees") - sum(yr, "vat") - sum(yr, "profit")), "--c-ship"], [H("Beneficio", "Profit"), Math.max(0, sum(yr, "profit")), "--c-profit"]
+  ].filter(p => p[1] > 0.5), pTot = parts.reduce((t, p) => t + p[1], 0);
+  const splitHtml = pTot > 0
+    ? `<div class="split" role="img" aria-label="${esc(H("Reparto de lo facturado", "Breakdown of billed amount"))}">${parts.map((p, i) => `<i style="--i:${i};width:${(p[1] / pTot * 100).toFixed(2)}%;background:var(${p[2]})" data-tip="${esc(p[0] + ": " + eur(p[1]))}"></i>`).join("")}</div>
+       <ul class="legend">${parts.map(p => `<li><span class="dot" style="background:var(${p[2]})"></span>${esc(p[0])}<span class="v">${eur(p[1])} · ${fmtN(p[1] / pTot * 100, 0)} %</span></li>`).join("")}<li class="sep"><span class="dot" style="background:transparent"></span>${H("Facturado en", "Billed in")} ${yk}<span class="v">${eur(yTotal)}</span></li></ul>`
+    : `<div class="empty"><b>${H("Sin cobros este año", "No payments this year")}</b>${H("Aquí verás a dónde va lo que facturas.", "Here you will see where your revenue goes.")}</div>`;
+
+  const recent = orders.slice().sort((a, b) => String(b.updated).localeCompare(String(a.updated))).slice(0, 5);
+  const recentHtml = recent.length
+    ? `<ul class="recent">${recent.map(o => { const f = figures(o); return `<li><button type="button" data-open="${o.id}"><span class="d" style="--st:${stById(o.status).c}" aria-hidden="true"></span><span class="t">${esc(o.title || clientName(o) || (o.lines[0] || {}).name || H("Pedido sin título", "Untitled order"))}<small style="display:block;color:var(--muted)">${esc(stName(o.status))}</small></span><span class="m">${f ? eur(f.total) : ""}</span></button></li>`; }).join("")}</ul>`
+    : `<div class="empty"><b>${H("Sin pedidos recientes", "No recent orders")}</b></div>`;
+
+  el.className = anim ? "anim" : "";
+  el.innerHTML = `
+    <div class="kpis">${kpis}</div>
+    <div class="navgrid">${cards}</div>
+    <div class="home-grid">
+      <section class="panel hw-5 rise" style="--i:11"><h2>${H("Avisos", "Alerts")}<span class="hint">${real ? H(`${real} por revisar`, `${real} to review`) : ""}</span></h2><div class="alerts">${alertsHtml}</div></section>
+      <section class="panel hw-7 rise" style="--i:12"><h2>${H("Facturado y beneficio", "Billed and profit")}<span class="hint">${H("últimos 6 meses · pedidos cobrados", "last 6 months · paid orders")}</span></h2>${chart}${anyPaid ? `<div class="row-actions" style="margin-top:8px"><button type="button" class="btn ghost sm" data-go="report">${H("Ver la tabla completa", "View the full table")}</button></div>` : ""}</section>
+      <section class="panel hw-4 rise" style="--i:13"><h2>${H("Pedidos por estado", "Orders by status")}</h2>${statusHtml}</section>
+      <section class="panel hw-4 rise" style="--i:14"><h2>${H("A dónde va lo facturado", "Where the money goes")}<span class="hint">${yk}</span></h2>${splitHtml}</section>
+      <section class="panel hw-4 rise" style="--i:15"><h2>${H("Últimos pedidos", "Latest orders")}</h2>${recentHtml}</section>
+    </div>`;
+  countUp(el, anim);
+}
+// los importes de las tarjetas suben desde 0 al entrar en Inicio
+function countUp(root, animate){
+  const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+  root.querySelectorAll("[data-count]").forEach(n => {
+    const to = +n.dataset.count || 0;
+    if (!animate || reduce || !to) return;
+    const t0 = performance.now(), D = 850;
+    n.textContent = eur(0);
+    const tick = now => { if (!n.isConnected) return; const p = Math.min(1, (now - t0) / D); n.textContent = eur(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  });
+}
+$("#view-home").addEventListener("click", e => {
+  const g = e.target.closest("[data-go]"), op = e.target.closest("[data-open]"), a = e.target.closest("[data-act]");
+  if (g) return showView(g.dataset.go);
+  if (op){ DB.current = op.dataset.open; selLine = null; ensureCurrent(); persist(); return showView("calc"); }
+  if (a && a.dataset.act === "file") return $("#fileChip").click();
+  if (e.target.closest("#homeNew")){ showView("calc"); $("#newBtn").click(); }
+});
+
+// información al pasar el ratón, al enfocar con teclado o al tocar
+const tipEl = document.createElement("div");
+tipEl.className = "tip"; tipEl.setAttribute("role", "tooltip"); tipEl.setAttribute("data-noi18n", ""); document.body.appendChild(tipEl);
+let tipT = 0;
+function showTip(t, x, y){
+  tipEl.textContent = t.dataset.tip; tipEl.classList.add("on");
+  const r = tipEl.getBoundingClientRect();
+  tipEl.style.left = Math.min(Math.max(8, x - r.width / 2), innerWidth - r.width - 8) + "px";
+  tipEl.style.top = (y - r.height - 12 < 8 ? y + 18 : y - r.height - 12) + "px";
+}
+document.addEventListener("mousemove", e => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t) showTip(t, e.clientX, e.clientY); else tipEl.classList.remove("on"); });
+document.addEventListener("focusin", e => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t){ const r = t.getBoundingClientRect(); showTip(t, r.left + r.width / 2, r.top); } });
+document.addEventListener("focusout", () => tipEl.classList.remove("on"));
+document.addEventListener("click", e => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t && matchMedia("(hover:none)").matches){ showTip(t, e.clientX, e.clientY); clearTimeout(tipT); tipT = setTimeout(() => tipEl.classList.remove("on"), 2600); } });
+
+// raya de color bajo la pestaña activa: se desliza de una a otra
+let inkReady = false;
+function moveInk(){
+  const t = document.querySelector('.tab[aria-selected="true"]'), ink = $("#tabInk"); if (!t || !ink) return;
+  if (!inkReady){ ink.style.transition = "none"; }
+  ink.style.transform = `translateX(${t.offsetLeft}px) scaleX(${t.offsetWidth / 100})`;
+  if (!inkReady){ void ink.offsetWidth; ink.style.transition = ""; inkReady = true; }
+  if (t.scrollIntoView) t.scrollIntoView({inline:"nearest", block:"nearest"});
+}
+function initNav(){
+  const b = $("#brand");
+  b.setAttribute("role", "link"); b.setAttribute("tabindex", "0"); b.onclick = () => showView("home");
+  b.onkeydown = e => { if (e.key === "Enter") showView("home"); };
+  if (window.ResizeObserver){ const ro = new ResizeObserver(() => moveInk()); $$(".tab").forEach(t => ro.observe(t)); }
+  addEventListener("resize", moveInk);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInk);
+  moveInk();
+}
+
+let view = null;
 $$(".tab").forEach(b => b.onclick = () => showView(b.dataset.view));
 function showView(v){
+  const changed = v !== view;
   view = v;
   $$(".tab").forEach(b => b.setAttribute("aria-selected", b.dataset.view === v));
   $$(".view").forEach(s => s.hidden = s.id !== "view-" + v);
+  if (changed){ const el = $("#view-" + v); el.classList.remove("enter"); void el.offsetWidth; el.classList.add("enter"); if (v === "home") homeAnim = true; }
   renderView();
+  moveInk();
   try { sessionStorage.setItem(KEY+".view", v); } catch(e){}
 }
 function renderView(){
   ensureCurrent();
+  if (view === "home") renderHome();
   if (view === "calc"){ fillEditor(); renderSummary(); renderBanner(); }
   if (view === "catalog") renderCatalog();
   if (view === "orders") renderOrders();
@@ -3170,8 +3528,9 @@ function renderView(){
   startI18n();
   ensureCurrent();
   renderFileChip();
-  let v = "calc"; try { v = sessionStorage.getItem(KEY+".view") || "calc"; } catch(e){}
+  let v = "home"; try { v = sessionStorage.getItem(KEY+".view") || "home"; } catch(e){}
   showView(v);
+  initNav();
 })();
 </script>
 </body>

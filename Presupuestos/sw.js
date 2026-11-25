@@ -1,6 +1,6 @@
 // Tarifa 3D: primero la red (siempre la última versión); sin conexión, la copia guardada.
 // Los datos no pasan por aquí: van a Google Drive y al navegador.
-const CACHE = "tarifa3d-20261124-002229";
+const CACHE = "tarifa3d-20261125-155729";
 self.addEventListener("install", e => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil((async () => {
   for (const k of await caches.keys()) if (k !== CACHE) await caches.delete(k);
