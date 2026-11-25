@@ -449,6 +449,12 @@ button.alert:hover{border-color:var(--line-strong);background:var(--sunk);transf
 .recent .d{width:9px;height:9px;border-radius:50%;background:var(--st);flex:none}
 .tip{position:fixed;z-index:60;left:0;top:0;pointer-events:none;padding:6px 10px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:12.5px;line-height:1.35;box-shadow:var(--shadow);opacity:0;transition:opacity .12s;max-width:260px}
 .tip.on{opacity:1}
+.sitefoot{max-width:1280px;margin:0 auto;padding:18px 24px 36px;border-top:1px solid var(--line);display:flex;gap:6px 18px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--muted)}
+.sitefoot:empty{display:none}
+.sitefoot a{color:var(--muted);text-decoration:none;transition:color .15s}
+.sitefoot a:hover{color:var(--accent)}
+.sitefoot .donate{color:var(--ink);font-weight:600}
+@media print{.sitefoot{display:none}}
 @media (prefers-reduced-motion:no-preference){
   .view.enter{animation:viewIn .34s var(--ease) both}
   @keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -815,6 +821,7 @@ button.alert:hover{border-color:var(--line-strong);background:var(--sunk);transf
   </div>
 </section>
 </main>
+<footer class="sitefoot" id="siteFoot" data-noi18n></footer>
 
 <div id="quote"></div>
 <dialog class="ask" id="invDlg" aria-labelledby="invDlgTitle">
@@ -881,6 +888,7 @@ button.alert:hover{border-color:var(--line-strong);background:var(--sunk);transf
    Formato y procedimiento del estudio de mercado: Presupuestos/LEEME.md
    ===================================================================== */
 const KEY = "tarifa3d.v2";
+const BUILD_LINKS = {"repo":"https://github.com/PabloCasar/tarifa3d","donate":""};   // lo rellena publicar.ps1: {repo, donate}
 const BUILD_BRAND = {"theme":"conarte","name":"ConArte3D","tagline":"Hecho capa a capa. Creado contigo.","symbol":"../ConArte3D/ConArte3D_kit_marca/01_logos/simbolo_compacto.svg","wordmark":"../ConArte3D/ConArte3D_kit_marca/01_logos/nombre_color.svg","wordmarkDark":"../ConArte3D/ConArte3D_kit_marca/01_logos/nombre_blanco.svg","thanks":"Gracias por dar forma a tus ideas."};   // lo rellena publicar.ps1 con la marca de movil/config.json
 const ICON_X = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 const ICON_PLUS = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
@@ -2546,6 +2554,17 @@ function renderReport(){
    ===================================================================== */
 /* ---------- marca ---------- */
 const GENERIC_ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent)"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6"/></svg>';
+function renderFoot(){
+  const f = $("#siteFoot"); if (!f) return;
+  const L = BUILD_LINKS || {}, repo = safeUrl(L.repo), don = safeUrl(L.donate);
+  if (!BUILD_LINKS){ f.innerHTML = ""; return; }
+  f.innerHTML = [
+    `<span>Tarifa 3D</span>`,
+    `<span>${H("Código abierto (MIT)", "Open source (MIT)")}</span>`,
+    repo ? `<a href="${esc(repo)}" target="_blank" rel="noopener noreferrer">GitHub</a>` : "",
+    don ? `<a class="donate" href="${esc(don)}" target="_blank" rel="noopener noreferrer">♥ ${H("Apoyar el proyecto", "Support the project")}</a>` : ""
+  ].filter(Boolean).join("");
+}
 function applyBrand(){
   // versión publicada: si los datos aún no traen marca, se usa la de la instalación
   if (BUILD_BRAND && !S.brandName){
@@ -2560,6 +2579,7 @@ function applyBrand(){
   const txt = S.brandWordmark ? `<img class="word lt${dk ? " has-dk" : ""}" src="${esc(S.brandWordmark)}" alt="${esc(name)}" onerror="this.outerHTML='<span>${esc(name).replace(/'/g, "")}</span>'">${dk}` : `<span class="bname">${esc(name)}${S.brandTagline ? `<small>${esc(S.brandTagline)}</small>` : ""}</span>`;
   $("#brand").innerHTML = sym + txt;
   document.title = name + " · " + (window.t ? t("Calculadora de precios") : "Calculadora de precios");
+  renderFoot();
 }
 function renderBrandSettings(){
   const sp = $("#symPrev"), wp = $("#wordPrev");

@@ -4,7 +4,7 @@
 
 > **Abrir la calculadora:** https://pablocasar.github.io/tarifa3d/Presupuestos/
 >
-> *English summary at the bottom of this page.*
+> **English:** [README.en.md](README.en.md)
 
 ---
 
@@ -105,18 +105,8 @@ Mientras no estés conectado, lo que hagas se guarda en el dispositivo y se sube
 
 El código es un único archivo HTML (JavaScript sin dependencias), que se publica con GitHub Pages. Para guardar en tu propio Drive hace falta crear un ID de cliente de Google (OAuth, tipo aplicación web) con el permiso `drive.file` y poner tu origen de GitHub Pages como origen autorizado; después, pegarlo en Tarifas → «Dónde se guarda» o en la configuración de publicación. No se necesita ninguna base de datos ni servidor.
 
----
+## Licencia
 
-## English summary
+El software se publica bajo la **licencia MIT** (consulta [LICENSE](LICENSE)): puedes usarlo, copiarlo, modificarlo y distribuirlo, también con fines comerciales, siempre que conserves el aviso de copyright.
 
-**Tarifa 3D** is a browser-based price calculator, order tracker and invoicing tool for people who sell 3D-printed parts. It was built for a small 3D printing business (ConArte3D) that needed to price pieces properly.
-
-- **Pricing:** cost = material + electricity + printer wear + failure allowance + labour + finishing + extras/accessories + design; price = cost × (1 + markup), with the sales channel's fees and VAT added backwards so the profit you want is what is left. Volume and friend discounts, rounding and a manual final price are supported.
-- **Slicer import:** reads `.gcode` and `.gcode.3mf` files (grams, time and objects), including several different objects on one plate.
-- **Orders, customers, invoices:** permanent order list, customer cards, sequentially numbered invoices and quotes as PDF, in the customer's language.
-- **Inventory:** filament spools with real €/kg and automatic deduction.
-- **Dashboard:** monthly revenue and profit charts, orders by status, where the money goes, and alerts.
-- **Your data stays yours:** it is stored in a folder on your computer or in your own Google Drive (the app only sees the files it creates). Nothing is sent to any other server. Data is merged, never overwritten, so several devices can be used safely.
-- **Phone:** installable as an app (PWA). English and Spanish UI, 22 currencies, custom branding, light/dark themes.
-
-Open it at https://pablocasar.github.io/tarifa3d/Presupuestos/ — this repository contains only the program, never any business data.
+El nombre, los logotipos y la identidad gráfica de **ConArte3D** (la carpeta `ConArte3D/`) **no** están cubiertos por esa licencia: todos los derechos reservados. Si publicas tu propia copia, sustitúyelos por los de tu marca.
